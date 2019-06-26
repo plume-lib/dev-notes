@@ -1,0 +1,14 @@
+EntryReader: should have a "trim whitespace" option and a "skip blank lines" option.
+
+Fix to handle arbitrary number of inner classes:
+~/java/plume-lib/reflection-util/src/main/java/org/plumelib/reflection/ReflectionPlume.java
+
+Rewrite run-google-java-format to be one big python program that doesn't have to call out to other python programs but can all run in one Python process.
+This also enables us to dispense with the code to download the other files.
+And this should enable it to better run under Windows.
+
+./bcel-util/gradle/mavencentral.gradle
+./options/gradle/mavencentral.gradle
+./plume-util/gradle/mavencentral.gradle
+./reflection-util/gradle/mavencentral.gradle
+./require-javadoc/gradle/mavencentral.gradle
