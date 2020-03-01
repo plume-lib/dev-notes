@@ -1,8 +1,8 @@
 This file indicates, for each plume-lib project,
 which other projects depend on it.
-That helps in determining which order releases should be made in,
-or what other project should be updated when one is.
 No indented line appears after the unindented version of that line.
+
+Make releases or updates in the order of this file.
 
 To determine what a project depends on (the opposite of this file), you can run:
 ./gradlew dependencies
