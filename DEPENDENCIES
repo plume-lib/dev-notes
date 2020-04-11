@@ -1,6 +1,8 @@
 This file indicates, for each plume-lib project,
 which other projects depend on it.
 No indented line appears after the unindented version of that line.
+(Actually, everything depends on require-javadoc, even itself, but
+those dependencies are compile-time-only.)
 
 Make releases or updates in the order of this file.
 
@@ -17,25 +19,27 @@ To determine what a project depends on (the opposite of this file), you can run:
   ~/java/plume-lib/options
   ~/java/plume-lib/plume-util
   ~/java/plume-lib/reflection-util
+  $test/randoop
+  $t/annotation-tools
+  $t/checker-framework
+  $inv/daikon
+~/java/plume-lib/options
+  ~/java/plume-lib/bibtex-clean
+  ~/java/plume-lib/icalavailable
+  ~/java/plume-lib/lookup
+  ~/java/plume-lib/multi-version-control
   ~/java/plume-lib/require-javadoc
-  ~/research/testing/randoop
-  ~/research/types/checker-framework
+  $test/randoop
 ~/java/plume-lib/reflection-util
   ~/java/plume-lib/bcel-util
   ~/java/plume-lib/plume-util
-  ~/research/testing/randoop
+  $test/randoop
 ~/java/plume-lib/bcel-util
-  ~/research/testing/randoop
-~/java/plume-lib/options
-  ~/java/plume-lib/icalavailable
-  ~/java/plume-lib/multi-version-control
-  ~/java/plume-lib/lookup
-  ~/java/plume-lib/bibtex-clean
-  ~/research/testing/randoop
+  $test/randoop
 ~/java/plume-lib/plume-util
-  ~/java/plume-lib/multi-version-control
-  ~/java/plume-lib/lookup
   ~/java/plume-lib/bibtex-clean
-  ~/research/types/checker-framework
-  ~/research/testing/randoop
+  ~/java/plume-lib/lookup
+  ~/java/plume-lib/multi-version-control
   ~/research/invariants/daikon/java/lib
+  $test/randoop
+  $t/checker-framework
