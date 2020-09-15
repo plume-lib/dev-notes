@@ -16,3 +16,5 @@ And this should enable it to better run under Windows.
 Change lookup program:
  * ignore lines starting with // rather than those starting with %
  * concatenate paragraphs if the second one ends with //nobreak
+
+MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
