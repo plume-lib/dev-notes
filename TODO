@@ -12,3 +12,7 @@ And this should enable it to better run under Windows.
 ./plume-util/gradle/mavencentral.gradle
 ./reflection-util/gradle/mavencentral.gradle
 ./require-javadoc/gradle/mavencentral.gradle
+
+Change lookup program:
+ * ignore lines starting with // rather than those starting with %
+ * concatenate paragraphs if the second one ends with //nobreak
