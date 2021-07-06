@@ -24,12 +24,12 @@ To determine what a project depends on (the opposite of this file), you can run:
   $t/checker-framework
   $inv/daikon
 ~/java/plume-lib/options
-  ~/java/plume-lib/bibtex-clean
   ~/java/plume-lib/icalavailable
   ~/java/plume-lib/lookup
   ~/java/plume-lib/multi-version-control
   ~/java/plume-lib/require-javadoc
   $test/randoop
+  $t/annotation-tools
 ~/java/plume-lib/reflection-util
   ~/java/plume-lib/bcel-util
   ~/java/plume-lib/plume-util
