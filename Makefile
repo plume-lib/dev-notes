@@ -1,5 +1,6 @@
 default: tags
 
+# Creates an overall TAGS table file that includes all projects.
 ../TAGS: tags
 tags: project-TAGS
 	cd .. && etags \
@@ -14,6 +15,7 @@ tags: project-TAGS
 	-i reflection-util \
 	-i require-javadoc
 
+# Creates multiple TAGS table files, one for each project.
 project-TAGS project-tags:
 	cd ../bcel-util && ./gradlew tags
 	cd ../bibtex-clean && ./gradlew tags
