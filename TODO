@@ -18,3 +18,5 @@ Change lookup program:
  * concatenate paragraphs if the second one ends with //nobreak
 
 MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
+
+require-javadoc: Maybe as of JDK 18, `javac -Xdoclint:all` gives "warning: no comment"
