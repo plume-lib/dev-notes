@@ -8,6 +8,7 @@ tags: project-TAGS
 	-i bibtex-clean \
 	-i html-pretty-print \
 	-i icalavailable \
+	-i javadoc-lookup \
 	-i lookup \
 	-i multi-version-control \
 	-i options \
@@ -21,6 +22,7 @@ project-TAGS project-tags:
 	cd ../bibtex-clean && ./gradlew tags
 	cd ../html-pretty-print && ./gradlew tags
 	cd ../icalavailable && ./gradlew tags
+	cd ../javadoc-lookup && ./gradlew tags
 	cd ../lookup && ./gradlew tags
 	cd ../multi-version-control && ./gradlew tags
 	cd ../options && ./gradlew tags
