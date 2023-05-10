@@ -3,15 +3,19 @@ EntryReader: should have a "trim whitespace" option and a "skip blank lines" opt
 Fix to handle arbitrary number of inner classes:
 ~/java/plume-lib/reflection-util/src/main/java/org/plumelib/reflection/ReflectionPlume.java
 
-Rewrite run-google-java-format to be one big python program that doesn't have to call out to other python programs but can all run in one Python process.
-This also enables us to dispense with the code to download the other files.
-And this should enable it to better run under Windows.
-
 Change lookup program:
  * ignore lines starting with // rather than those starting with %
  * concatenate paragraphs if the second one ends with //nobreak
 
-MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
-
 require-javadoc:
 Update documentation, because maybe as of JDK 18, `javac -Xdoclint:all` gives "warning: no comment"
+
+----------------
+
+Low priority:
+
+MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
+
+Rewrite WeakHasherMap and WeakIdentityHashMap from scratch so they can be reinstated into plume-util.
+Or, find an alternative, such as in Guava.
+(This was hard to do.)

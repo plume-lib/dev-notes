@@ -6,6 +6,7 @@ tags: project-TAGS
 	cd .. && etags \
 	-i bcel-util \
 	-i bibtex-clean \
+	-i hashmap-util \
 	-i html-pretty-print \
 	-i icalavailable \
 	-i javadoc-lookup \
@@ -20,6 +21,7 @@ tags: project-TAGS
 project-TAGS project-tags:
 	cd ../bcel-util && ./gradlew tags
 	cd ../bibtex-clean && ./gradlew tags
+	cd ../hashmap-util && ./gradlew tags
 	cd ../html-pretty-print && ./gradlew tags
 	cd ../icalavailable && ./gradlew tags
 	cd ../javadoc-lookup && ./gradlew tags
