@@ -16,6 +16,4 @@ Low priority:
 
 MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
 
-Rewrite WeakHasherMap and WeakIdentityHashMap from scratch so they can be reinstated into plume-util.
-Or, find an alternative, such as in Guava.
-(This was hard to do.)
+Benchmark ArraySet vs HashSet.
