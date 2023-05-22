@@ -46,3 +46,17 @@ test-local-cf:
 	cd ../plume-util && ./gradlew assemble -PcfLocal
 	cd ../reflection-util && ./gradlew assemble -PcfLocal
 	cd ../require-javadoc && ./gradlew assemble -PcfLocal
+
+test-build:
+	cd ../bcel-util && ./gradlew build
+	cd ../bibtex-clean && ./gradlew build
+	cd ../hashmap-util && ./gradlew build
+	cd ../html-pretty-print && ./gradlew build
+	cd ../icalavailable && ./gradlew build
+	cd ../javadoc-lookup && ./gradlew build
+	cd ../lookup && ./gradlew build
+	cd ../multi-version-control && ./gradlew build
+	cd ../options && ./gradlew build
+	cd ../plume-util && ./gradlew build
+	cd ../reflection-util && ./gradlew build
+	cd ../require-javadoc && ./gradlew build
