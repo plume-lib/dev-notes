@@ -2,15 +2,6 @@ To typecheck all projects with a locally-built Checker Framework:
 
 (cd ${CHECKERFRAMEWORK} && ./gradlew assemble) && \
 cd .. && \
-(cd bcel-util && ./gradlew build -PcfLocal) && \
-(cd bibtex-clean && ./gradlew build -PcfLocal) && \
-(cd html-pretty-print && ./gradlew build -PcfLocal) && \
-(cd icalavailable && ./gradlew build -PcfLocal) && \
-(cd javadoc-lookup && ./gradlew build -PcfLocal) && \
-(cd lookup && ./gradlew build -PcfLocal) && \
-(cd multi-version-control && ./gradlew build -PcfLocal) && \
-(cd options && ./gradlew build -PcfLocal) && \
-(cd plume-util && ./gradlew build -PcfLocal) && \
-(cd reflection-util && ./gradlew build -PcfLocal) && \
-(cd require-javadoc && ./gradlew build -PcfLocal) && \
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javadoc-lookup lookup multi-version-control options plume-util reflection-util require-javadoc ; do
+  echo $project && (cd $project && ./gradlew build -PcfLocal)
 true
