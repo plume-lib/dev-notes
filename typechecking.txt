@@ -4,4 +4,4 @@ To typecheck all projects with a locally-built Checker Framework:
 cd .. && \
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javadoc-lookup lookup multi-version-control options plume-util reflection-util require-javadoc ; do
   echo $project && (cd $project && ./gradlew build -PcfLocal)
-true
+done
