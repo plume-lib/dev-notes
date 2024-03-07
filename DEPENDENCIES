@@ -55,3 +55,22 @@ Nothing depends on these programs, and they don't appear in Maven Central.
 ~/java/plume-lib/javadoc-lookup
 ~/java/plume-lib/lookup
 ~/java/plume-lib/multi-version-control
+
+===========================================================================
+
+Here are all the Java repositories:
+
+bcel-util
+bibtex-clean
+hashmap-util
+html-pretty-print
+icalavailable
+javadoc-lookup
+lookup
+multi-version-control
+options
+plume-util
+reflection-util
+require-javadoc
+
+===========================================================================
