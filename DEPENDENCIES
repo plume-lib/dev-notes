@@ -36,6 +36,8 @@ To determine what a project depends on (the opposite of this file), you can run:
   $test/randoop
 ~/java/plume-lib/bcel-util
   $test/randoop
+~/java/plume-lib/javaparse
+  [nothing yet]
 ~/java/plume-lib/hashmap-util
   ~/java/plume-lib/plume-util
   $inv/daikon/java/lib
@@ -66,6 +68,7 @@ hashmap-util
 html-pretty-print
 icalavailable
 javadoc-lookup
+javaparse
 lookup
 multi-version-control
 options
