@@ -36,7 +36,7 @@ To determine what a project depends on (the opposite of this file), you can run:
   $test/randoop
 ~/java/plume-lib/bcel-util
   $test/randoop
-~/java/plume-lib/javaparse
+~/java/plume-lib/javac-parse
   [nothing yet]
 ~/java/plume-lib/hashmap-util
   ~/java/plume-lib/plume-util
@@ -56,6 +56,7 @@ Nothing depends on these programs, and they don't appear in Maven Central.
 ~/java/plume-lib/icalavailable
 ~/java/plume-lib/javadoc-lookup
 ~/java/plume-lib/lookup
+~/java/plume-lib/merge-tools
 ~/java/plume-lib/multi-version-control
 
 ===========================================================================
@@ -67,9 +68,10 @@ bibtex-clean
 hashmap-util
 html-pretty-print
 icalavailable
+javac-parse
 javadoc-lookup
-javaparse
 lookup
+merge-tools
 multi-version-control
 options
 plume-util
