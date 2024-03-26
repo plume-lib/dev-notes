@@ -79,3 +79,13 @@ reflection-util
 require-javadoc
 
 ===========================================================================
+
+Here are the Java libraries that are uploaded to Maven Central:
+
+~/java/plume-lib/bcel-util
+~/java/plume-lib/hashmap-util
+~/java/plume-lib/javac-parse
+~/java/plume-lib/options
+~/java/plume-lib/plume-util
+~/java/plume-lib/reflection-util
+~/java/plume-lib/require-javadoc
