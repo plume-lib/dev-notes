@@ -11,6 +11,9 @@ require-javadoc:
 Update documentation, because maybe as of JDK 18, `javac -Xdoclint:all` gives "warning: no comment"
 JavaParser is not being extended to Java 18+.  So probably rewrite using javac's parser.
 
+in multi-version-control, do:
+git fetch --tags --force
+
 ----------------
 
 Low priority:
