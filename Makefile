@@ -9,8 +9,10 @@ tags: project-TAGS
 	-i hashmap-util \
 	-i html-pretty-print \
 	-i icalavailable \
+	-i javac-parse \
 	-i javadoc-lookup \
 	-i lookup \
+	-i merging \
 	-i multi-version-control \
 	-i options \
 	-i plume-util \
@@ -24,39 +26,61 @@ project-TAGS project-tags:
 	cd ../hashmap-util && ./gradlew tags
 	cd ../html-pretty-print && ./gradlew tags
 	cd ../icalavailable && ./gradlew tags
+	cd ../javac-parse && ./gradlew tags
 	cd ../javadoc-lookup && ./gradlew tags
 	cd ../lookup && ./gradlew tags
+	cd ../merging && ./gradlew tags
 	cd ../multi-version-control && ./gradlew tags
 	cd ../options && ./gradlew tags
 	cd ../plume-util && ./gradlew tags
 	cd ../reflection-util && ./gradlew tags
 	cd ../require-javadoc && ./gradlew tags
 
-test-local-cf:
+typecheck-local-cf:
 	cd ${CHECKERFRAMEWORK} && ./gradlew assembleForJavac
 	cd ../bcel-util && ./gradlew assemble -PcfLocal
 	cd ../bibtex-clean && ./gradlew assemble -PcfLocal
 	cd ../hashmap-util && ./gradlew assemble -PcfLocal
 	cd ../html-pretty-print && ./gradlew assemble -PcfLocal
 	cd ../icalavailable && ./gradlew assemble -PcfLocal
+	cd ../javac-parse && ./gradlew assemble -PcfLocal
 	cd ../javadoc-lookup && ./gradlew assemble -PcfLocal
 	cd ../lookup && ./gradlew assemble -PcfLocal
+	cd ../merging && ./gradlew assemble -PcfLocal
 	cd ../multi-version-control && ./gradlew assemble -PcfLocal
 	cd ../options && ./gradlew assemble -PcfLocal
 	cd ../plume-util && ./gradlew assemble -PcfLocal
 	cd ../reflection-util && ./gradlew assemble -PcfLocal
 	cd ../require-javadoc && ./gradlew assemble -PcfLocal
 
-test-build:
+build:
 	cd ../bcel-util && ./gradlew build
 	cd ../bibtex-clean && ./gradlew build
 	cd ../hashmap-util && ./gradlew build
 	cd ../html-pretty-print && ./gradlew build
 	cd ../icalavailable && ./gradlew build
+	cd ../javac-parse && ./gradlew build
 	cd ../javadoc-lookup && ./gradlew build
 	cd ../lookup && ./gradlew build
+	cd ../merging && ./gradlew build
 	cd ../multi-version-control && ./gradlew build
 	cd ../options && ./gradlew build
 	cd ../plume-util && ./gradlew build
 	cd ../reflection-util && ./gradlew build
 	cd ../require-javadoc && ./gradlew build
+
+javadoc:
+	cd ../bcel-util && ./gradlew javadoc
+	cd ../bibtex-clean && ./gradlew javadoc
+	cd ../hashmap-util && ./gradlew javadoc
+	cd ../html-pretty-print && ./gradlew javadoc
+	cd ../icalavailable && ./gradlew javadoc
+	cd ../javac-parse && ./gradlew javadoc
+	cd ../javadoc-lookup && ./gradlew javadoc
+	cd ../lookup && ./gradlew javadoc
+	cd ../merging && ./gradlew javadoc
+	cd ../multi-version-control && ./gradlew javadoc
+	cd ../options && ./gradlew javadoc
+	cd ../plume-util && ./gradlew javadoc
+	cd ../reflection-util && ./gradlew javadoc
+	cd ../require-javadoc && ./gradlew javadoc

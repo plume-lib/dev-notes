@@ -56,7 +56,7 @@ Nothing depends on these programs, and they don't appear in Maven Central.
 ~/java/plume-lib/icalavailable
 ~/java/plume-lib/javadoc-lookup
 ~/java/plume-lib/lookup
-~/java/plume-lib/merge-tools
+~/java/plume-lib/merging
 ~/java/plume-lib/multi-version-control
 
 ===========================================================================
@@ -71,7 +71,7 @@ icalavailable
 javac-parse
 javadoc-lookup
 lookup
-merge-tools
+merging
 multi-version-control
 options
 plume-util
