@@ -14,6 +14,9 @@ JavaParser is not being extended to Java 18+.  So probably rewrite using javac's
 in multi-version-control, do:
 git fetch --tags --force
 
+plume-util:
+Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
+
 ----------------
 
 Low priority:
