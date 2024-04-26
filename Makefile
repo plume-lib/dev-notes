@@ -8,7 +8,13 @@ default: tags
 ## For example, here is how to update the JDK in GitHub Actions CI:
 # cd ~/java/plume-lib
 # for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
-#   echo $project && (cd $project && git pull && gnb ci-java22 && sed -i -e "s/'17', '21', '22'/'11', '17', '21', '23'/" .github/workflows/gradle.yml && git commit -a -m "Test under Java 23" && git push) || echo "Problem with $project"
+#   echo $project && (cd $project && \
+#   git pull && \
+#   gnb ci-java23 && \
+#   cd ../${project}-branch-ci-java23 && \
+#   sed -i -e "s/'17', '21', '22'/'11', '17', '21', '23'/" .github/workflows/gradle.yml && \
+#   git commit -a -m "Test under Java 23" && \
+#   git push) || echo "Problem with $project"
 # done
 # # Then look through the output for "Problem with " to find and fix exceptions.
 
