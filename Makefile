@@ -1,5 +1,7 @@
 default: tags
 
+## Note that the `merging` project requires Java 17 or later.
+
 ## For other tasks not automated by this Makefile, do something like the following:
 # for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
 #   echo $project && (cd $project && ...) || echo "Problem with $project"
@@ -82,7 +84,7 @@ build:
 	cd ../javac-parse && ./gradlew build
 	cd ../javadoc-lookup && ./gradlew build
 	cd ../lookup && ./gradlew build
-	cd ../merging && ./gradlew build
+#	cd ../merging && ./gradlew build
 	cd ../multi-version-control && ./gradlew build
 	cd ../options && ./gradlew build
 	cd ../plume-util && ./gradlew build
