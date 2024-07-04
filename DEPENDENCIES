@@ -61,7 +61,7 @@ Nothing depends on these programs, and they don't appear in Maven Central.
 
 ===========================================================================
 
-Here are all the Java repositories:
+Here are all the Java repositories (14 in all):
 
 bcel-util
 bibtex-clean
