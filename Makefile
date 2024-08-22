@@ -59,7 +59,7 @@ project-TAGS project-tags:
 	cd ../require-javadoc && ./gradlew tags
 
 typecheck-local-cf:
-	cd ${CHECKERFRAMEWORK} && ./gradlew assembleForJavac
+	(cd ${CHECKERFRAMEWORK} && ./gradlew assembleForJavac)
 	cd ../bcel-util && ./gradlew assemble -PcfLocal
 	cd ../bibtex-clean && ./gradlew assemble -PcfLocal
 	cd ../hashmap-util && ./gradlew assemble -PcfLocal
@@ -84,7 +84,7 @@ build:
 	cd ../javac-parse && ./gradlew build
 	cd ../javadoc-lookup && ./gradlew build
 	cd ../lookup && ./gradlew build
-#	cd ../merging && ./gradlew build
+	cd ../merging && ./gradlew nativeCompile build
 	cd ../multi-version-control && ./gradlew build
 	cd ../options && ./gradlew build
 	cd ../plume-util && ./gradlew build
