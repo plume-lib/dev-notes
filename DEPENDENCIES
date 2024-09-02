@@ -104,3 +104,15 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
 done
 
 ===========================================================================
+
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst-branch-java-23
+  gnb java-23-comments
+  cd ~/java/plume-lib/$project-fork-mernst-branch-java-23-comments
+  preplace "'23-ea'" "'22'" .github/workflows/gradle.yml
+  git commit -m "Make comments compatible with Java 23" .github/workflows/gradle.yml
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/java-23-comments
+done
+
+===========================================================================
