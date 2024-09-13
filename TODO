@@ -1,3 +1,6 @@
+MultiVersionControl:
+Insert each import statement where it belongs, alphabetically, rather than inserting them all as a block.
+
 EntryReader: should have a "trim whitespace" option and a "skip blank lines" option.
 
 Fix to handle arbitrary number of inner classes:
