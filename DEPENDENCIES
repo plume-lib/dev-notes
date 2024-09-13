@@ -93,14 +93,15 @@ Here are the Java libraries that are uploaded to Maven Central:
 ===========================================================================
 
 # To update to a newer version of Java:
+BRANCHNAME=java-23
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
-  gnb java-23
-  cd ~/java/plume-lib/$project-fork-mernst-branch-java-23
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   preplace "'22'" "'23-ea'" .github/workflows/gradle.yml
   git commit -m "Test under JDK 23" .github/workflows/gradle.yml
   git push
-  xdg-open https://github.com/mernst/$project/pull/new/java-23
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
 done
 
 ===========================================================================
