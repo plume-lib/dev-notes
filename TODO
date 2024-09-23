@@ -21,7 +21,8 @@ plume-util:
 Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
 
 merging:
-perhaps don't re-insert if a wildcard import has been inserted.  ImportsTest13 is an example of this.
+ * perhaps don't re-insert if a wildcard import has been inserted.  ImportsTest13 is an example of this.
+ * Rename to have a "plumelib-" prefix: merge-tool.sh, merge-driver.sh
 
 ----------------
 
