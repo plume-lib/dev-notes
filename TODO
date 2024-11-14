@@ -18,11 +18,18 @@ in multi-version-control, do:
 git fetch --tags --force
 
 plume-util:
-Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
+ * Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
+ * To instructions:
+   When making a release of plume-util, double-check package-info.java.
+
+Ensure all plume-lib packages have a package-info.java file.
 
 merging:
  * perhaps don't re-insert if a wildcard import has been inserted.  ImportsTest13 is an example of this.
  * Rename to have a "plumelib-" prefix: merge-tool.sh, merge-driver.sh
+ * Implement the "overlapping lines" metric.
+ * Think about diff3 as an implementation strategy.
+
 
 ----------------
 
