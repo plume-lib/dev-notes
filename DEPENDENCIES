@@ -92,6 +92,35 @@ Here are the Java libraries that are uploaded to Maven Central:
 
 ===========================================================================
 
+
+# To fix Gradle warnings:
+BRANCHNAME=gradle-warnings
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  preplace indentWithSpaces leadingTabsToSpaces build.gradle
+  preplace "\{ url ([^=])" "\{ url = \1" build.gradle
+  preplace "  description ([^=])" "  description = \1" build.gradle
+  if [ -f gradle/mavencentral.gradle ] ; then
+    preplace "^group ([^=])" "group = \1" gradle/mavencentral.gradle
+    preplace "^version ([^=])" "version = \1" gradle/mavencentral.gradle
+    git commit -m "Fix gradle warnings"  build.gradle gradle/mavencentral.gradle
+  else
+    git commit -m "Fix gradle warnings"  build.gradle
+  fi
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+BRANCHNAME=gradle-warnings
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  ./gradlew build --warning-mode all
+done
+
+===========================================================================
+
 # To update to a newer version of Java:
 BRANCHNAME=java-23
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
