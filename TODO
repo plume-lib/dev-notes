@@ -30,6 +30,7 @@ merging:
  * Implement the "overlapping lines" metric.
  * Think about diff3 as an implementation strategy.
 
+mvc: treat "git clone" as a synonym of "GITREPOS:".
 
 ----------------
 
