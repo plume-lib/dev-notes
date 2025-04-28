@@ -17,6 +17,9 @@ JavaParser is not being extended to Java 18+.  So probably rewrite using javac's
 in multi-version-control, do:
 git fetch --tags --force
 
+A "pull-from-https" script: for file .git/config, if it contains no "pushurl" line, and it's a "git@github" URL, and the https version is public (determine via wget or similar), then change url line to it and add new url line that uses https.
+mvc checkout could test whether the repo is public, and if so then call the script.  (Actually, the script should just do that?)
+
 plume-util:
  * Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
  * To instructions:
@@ -39,3 +42,6 @@ Low priority:
 MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
 
 Benchmark ArraySet vs HashSet.
+
+Microbenchmarks to determine the benefit of org.plumelib.util.ArrayMap .
+Issue warning on add() if it gets too full (say, 20 items??).

@@ -130,6 +130,9 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   preplace "'23-ea'" "'24'" .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    preplace "'23-ea'" "'24'" .github/workflows/gradle.yml
+  fi
   git commit -m "Test under JDK 24" .github/workflows/gradle.yml
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
