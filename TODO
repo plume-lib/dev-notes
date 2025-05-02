@@ -33,7 +33,9 @@ merging:
  * Implement the "overlapping lines" metric.
  * Think about diff3 as an implementation strategy.
 
-mvc: treat "git clone" as a synonym of "GITREPOS:".
+mvc: treat "git clone" as a synonym of "GITREPOS:", in the configuration file.
+
+mvc: Add command "gc".
 
 ----------------
 
