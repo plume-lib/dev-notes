@@ -37,6 +37,8 @@ mvc: treat "git clone" as a synonym of "GITREPOS:", in the configuration file.
 
 mvc: Add command "gc".
 
+mvc: run `git-restore-mtime` after `git clone`.
+
 ----------------
 
 Low priority:
