@@ -92,7 +92,6 @@ Here are the Java libraries that are uploaded to Maven Central:
 
 ===========================================================================
 
-
 # To fix Gradle warnings:
 BRANCHNAME=gradle-warnings
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
@@ -122,7 +121,7 @@ done
 ===========================================================================
 
 # To update to a newer version of Java:
-# (Before doing this, ensure that Gradle supports the new Java version:
+# (Before doing this, check which Java versions the new Gradle supports.)
 # https://docs.gradle.org/current/userguide/compatibility.html .)
 BRANCHNAME=java-24
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
@@ -131,9 +130,35 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   preplace "'23-ea'" "'24'" .github/workflows/gradle.yml
   if [ -f .github/workflows/gradle-native-compile.yml ] ; then
-    preplace "'23-ea'" "'24'" .github/workflows/gradle.yml
+    preplace "'23-ea'" "'24'" .github/workflows/gradle-native-compile.yml
   fi
   git commit -m "Test under JDK 24" .github/workflows/gradle.yml
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
+# To update to a newer version of Gradle:
+# (Before doing this, check which Java versions Gradle no longer supports:
+# https://docs.gradle.org/current/userguide/compatibility.html .)
+BRANCHNAME=gradle-9
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  ./gradlew wrapper --gradle-version 9.0.0
+  git add gradle/wrapper/gradle-wrapper.properties
+  preplace ' == JavaVersion.VERSION_1_8' ' < JavaVersion.VERSION_17' settings.gradle
+  preplace "Java 11 or later" "Java 17 or later" settings.gradle
+  git add settings.gradle
+  preplace "'11', '17'" "'17'" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    preplace "'11', '17'" "'17'" .github/workflows/gradle.yml
+    git add .github/workflows/gradle.yml
+  fi
+  git commit -m "Use Gradle 9"
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
 done
