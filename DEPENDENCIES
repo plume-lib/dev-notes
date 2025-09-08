@@ -120,19 +120,42 @@ done
 
 ===========================================================================
 
-# To update to a newer version of Java:
+# To update from an early release version of Java:
 # (Before doing this, check which Java versions the new Gradle supports.)
 # https://docs.gradle.org/current/userguide/compatibility.html .)
-BRANCHNAME=java-24
+BRANCHNAME=java-25
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
-  preplace "'23-ea'" "'24'" .github/workflows/gradle.yml
+  sed -i "s/'24', '25-ea'/'25'/g" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
   if [ -f .github/workflows/gradle-native-compile.yml ] ; then
-    preplace "'23-ea'" "'24'" .github/workflows/gradle-native-compile.yml
+    sed -i "s/'24', '25-ea'/'25'/g" .github/workflows/gradle-native-compile.yml
+    git add .github/workflows/gradle-native-compile.yml
   fi
-  git commit -m "Test under JDK 24" .github/workflows/gradle.yml
+  git commit -m "Test under JDK 25"
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
+# To update to an early release version of Java:
+# (Before doing this, check which Java versions the new Gradle supports.)
+# https://docs.gradle.org/current/userguide/compatibility.html .)
+BRANCHNAME=java-25
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  sed -i "s/'24'/'24', '25-ea'/g" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    sed -i "s/'24'/'24', '25-ea'/g" .github/workflows/gradle-native-compile.yml
+    git add .github/workflows/gradle-native-compile.yml
+  fi
+  git commit -m "Test under JDK 25"
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
 done
@@ -152,10 +175,10 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   preplace ' == JavaVersion.VERSION_1_8' ' < JavaVersion.VERSION_17' settings.gradle
   preplace "Java 11 or later" "Java 17 or later" settings.gradle
   git add settings.gradle
-  preplace "'11', '17'" "'17'" .github/workflows/gradle.yml
+  sed -i "s/'11', '17'/'17'/" .github/workflows/gradle.yml
   git add .github/workflows/gradle.yml
   if [ -f .github/workflows/gradle-native-compile.yml ] ; then
-    preplace "'11', '17'" "'17'" .github/workflows/gradle.yml
+    sed -i "s/'11', '17'/'17'/" .github/workflows/gradle.yml
     git add .github/workflows/gradle.yml
   fi
   git commit -m "Use Gradle 9"
