@@ -1,0 +1,97 @@
+===========================================================================
+
+# To fix Gradle warnings:
+BRANCHNAME=gradle-warnings
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  preplace indentWithSpaces leadingTabsToSpaces build.gradle
+  preplace "\{ url ([^=])" "\{ url = \1" build.gradle
+  preplace "  description ([^=])" "  description = \1" build.gradle
+  if [ -f gradle/mavencentral.gradle ] ; then
+    preplace "^group ([^=])" "group = \1" gradle/mavencentral.gradle
+    preplace "^version ([^=])" "version = \1" gradle/mavencentral.gradle
+    git commit -m "Fix gradle warnings"  build.gradle gradle/mavencentral.gradle
+  else
+    git commit -m "Fix gradle warnings"  build.gradle
+  fi
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+BRANCHNAME=gradle-warnings
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  ./gradlew build --warning-mode all
+done
+
+===========================================================================
+
+# To upgrade from an early release version of Java:
+# (Before doing this, check which Java versions the new Gradle supports.)
+# https://docs.gradle.org/current/userguide/compatibility.html .)
+BRANCHNAME=java-25
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  sed -i "s/'24', '25-ea'/'25'/g" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    sed -i "s/'24', '25-ea'/'25'/g" .github/workflows/gradle-native-compile.yml
+    git add .github/workflows/gradle-native-compile.yml
+  fi
+  git commit -m "Test under JDK 25"
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
+# To upgrade to an early release version of Java:
+# (Before doing this, check which Java versions the new Gradle supports.)
+# https://docs.gradle.org/current/userguide/compatibility.html .)
+BRANCHNAME=java-25
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  sed -i "s/'24'/'24', '25-ea'/g" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    sed -i "s/'24'/'24', '25-ea'/g" .github/workflows/gradle-native-compile.yml
+    git add .github/workflows/gradle-native-compile.yml
+  fi
+  git commit -m "Test under JDK 25"
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
+# To upgrad to a newer version of Gradle:
+# (Before doing this, check which Java versions Gradle no longer supports:
+# https://docs.gradle.org/current/userguide/compatibility.html .)
+BRANCHNAME=gradle-9
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  ./gradlew wrapper --gradle-version 9.0.0
+  git add gradle/wrapper/gradle-wrapper.properties
+  preplace ' == JavaVersion.VERSION_1_8' ' < JavaVersion.VERSION_17' settings.gradle
+  preplace "Java 11 or later" "Java 17 or later" settings.gradle
+  git add settings.gradle
+  sed -i "s/'11', '17'/'17'/" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    sed -i "s/'11', '17'/'17'/" .github/workflows/gradle.yml
+    git add .github/workflows/gradle.yml
+  fi
+  git commit -m "Use Gradle 9"
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
