@@ -7,6 +7,7 @@ Fix to handle arbitrary number of inner classes:
 ~/java/plume-lib/reflection-util/src/main/java/org/plumelib/reflection/ReflectionPlume.java
 
 Change lookup program:
+ * permit ignoring by <!-- ... -->
  * ignore lines starting with // rather than those starting with %
  * concatenate paragraphs if the second one ends with //nobreak
 
