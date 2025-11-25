@@ -91,6 +91,7 @@ build:
 	cd ../reflection-util && ./gradlew build
 	cd ../require-javadoc && ./gradlew build
 
+# This is subsumed by "build".
 javadoc:
 	cd ../bcel-util && ./gradlew javadoc
 	cd ../bibtex-clean && ./gradlew javadoc
