@@ -107,3 +107,16 @@ javadoc:
 	cd ../plume-util && ./gradlew javadoc
 	cd ../reflection-util && ./gradlew javadoc
 	cd ../require-javadoc && ./gradlew javadoc
+
+ifeq (,$(wildcard ../Makefile))
+dummy := $(shell cd .. && ln -s dev-notes/Makefile-parent Makefile)
+endif
+
+style-fix:
+	cd .. && ${MAKE} style-fix
+
+style-check:
+	cd .. && ${MAKE} style-check
+
+showvars:
+	cd .. && ${MAKE} showvars
