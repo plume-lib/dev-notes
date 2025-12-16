@@ -1,48 +1,45 @@
 MultiVersionControl:
-Insert each import statement where it belongs, alphabetically, rather than inserting them all as a block.
+* Insert each import statement where it belongs, alphabetically, rather than inserting them all as a block.
+* treat "git clone" as a synonym of "GITREPOS:", in the configuration file.
+* Add command "gc".
+* run `git-restore-mtime` after `git clone`.
+* do: git fetch --tags --force
+* [low priority] rewrite the recursive search routine using newer Java interfaces.
 
-EntryReader: should have a "trim whitespace" option and a "skip blank lines" option.
+EntryReader:
+* add a "trim whitespace" option and a "skip blank lines" option.
+* permit ignoring by <!-- ... -->
 
 Fix to handle arbitrary number of inner classes:
 ~/java/plume-lib/reflection-util/src/main/java/org/plumelib/reflection/ReflectionPlume.java
 
-Change lookup program:
- * permit ignoring by <!-- ... -->
- * ignore lines starting with // rather than those starting with %
- * concatenate paragraphs if the second one ends with //nobreak
+Lookup:
+* permit ignoring by <!-- ... -->
+* by default don't have line comments, for Markdown files
 
-in multi-version-control, do:
-git fetch --tags --force
-
-A "pull-from-https" script: for file .git/config, if it contains no "pushurl" line, and it's a "git@github" URL, and the https version is public (determine via wget or similar), then change url line to it and add new url line that uses https.
+git-scripts:
+* A "pull-from-https" script: for file .git/config, if it contains no "pushurl" line, and it's a "git@github" URL, and the https version is public (determine via wget or similar), then change url line to it and add new url line that uses https.
 mvc checkout could test whether the repo is public, and if so then call the script.  (Actually, the script should just do that?)
 
 plume-util:
- * Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
- * To instructions:
-   When making a release of plume-util, double-check package-info.java.
+* Define OrderedPairIterable, encourage clients to use it instead of OrderedPairIterator (but don't deprecate the latter).
+* To instructions:
+  When making a release of plume-util, double-check package-info.java.
 
 Ensure all plume-lib packages have a package-info.java file.
 
 merging:
- * perhaps don't re-insert if a wildcard import has been inserted.  ImportsTest13 is an example of this.
- * Rename to have a "plumelib-" prefix: merge-tool.sh, merge-driver.sh
- * Implement the "overlapping lines" metric.
- * Think about diff3 as an implementation strategy.
+* perhaps don't re-insert if a wildcard import has been inserted.  ImportsTest13 is an example of this.
+* Rename to have a "plumelib-" prefix: merge-tool.sh, merge-driver.sh
+* Implement the "overlapping lines" metric.
+* Think about diff3 as an implementation strategy.
 
-mvc: treat "git clone" as a synonym of "GITREPOS:", in the configuration file.
-
-mvc: Add command "gc".
-
-mvc: run `git-restore-mtime` after `git clone`.
 
 ----------------
 
 Low priority:
 
-MultiVersionControl: rewrite the recursive search routine using newer Java interfaces.
-
 Benchmark ArraySet vs HashSet.
 
 Microbenchmarks to determine the benefit of org.plumelib.util.ArrayMap .
-Issue warning on add() if it gets too full (say, 20 items??).
+Issue warning (to stderr) on add() if it gets too full (say, 20 items??).
