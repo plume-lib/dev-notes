@@ -26,6 +26,7 @@ etags `findfile build.gradle | grep $BRANCHNAME`
 # To build (after setting BRANCHNAME):
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
   ./gradlew build --warning-mode all
 done
 
