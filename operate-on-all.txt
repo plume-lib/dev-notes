@@ -6,6 +6,7 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
   preplace indentWithSpaces leadingTabsToSpaces build.gradle
   preplace "\{ url ([^=])" "\{ url = \1" build.gradle
   preplace "  description ([^=])" "  description = \1" build.gradle
@@ -42,6 +43,7 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
   sed -i "s/'24', '25-ea'/'24', '25'/g" .github/workflows/gradle.yml
   sed -i "s/'25', '26-ea'/'26'/g" .github/workflows/gradle.yml
   git add .github/workflows/gradle.yml
@@ -67,6 +69,7 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
   sed -i "s/'${VER_PREV}'/'${VER_PREV}', '${VER_NEXT}-ea'/g" .github/workflows/gradle.yml
   git add .github/workflows/gradle.yml
   if [ -f .github/workflows/gradle-native-compile.yml ] ; then
@@ -88,6 +91,7 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
   ./gradlew wrapper --gradle-version 9.0.0
   git add gradle/wrapper/gradle-wrapper.properties
   preplace ' == JavaVersion.VERSION_1_8' ' < JavaVersion.VERSION_17' settings.gradle
