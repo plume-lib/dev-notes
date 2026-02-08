@@ -1,5 +1,28 @@
 ===========================================================================
 
+# To update files copied from elsewhere:
+BRANCHNAME=update-copied-files
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
+  PLUME_SCRIPTS=$HOME/bin/src/plume-scripts
+  for file in .coderabbit.yaml .pmd-ruleset.xml .github/renovate.json; do
+    cp -pf ${PLUME_SCRIPTS}/$file $file
+    git add $file
+  done
+  cp -pf ${PLUME_SCRIPTS}/code-style-github-workflow.yml .github/workflows/code-style.yml
+  git add .github/workflows/code-style.yml
+  cp -pf ${PLUME_SCRIPTS}/code-style.Makefile Makefile
+  git add Makefile
+  git commit -m "Update copied files"
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
 # To fix Gradle warnings:
 BRANCHNAME=gradle-warnings
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
@@ -20,6 +43,8 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
 done
+
+===========================================================================
 
 # To create an Emacs TAGS table (after setting BRANCHNAME):
 etags `findfile build.gradle | grep $BRANCHNAME`
