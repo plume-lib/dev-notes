@@ -60,20 +60,20 @@ project-TAGS project-tags:
 
 typecheck-local-cf:
 	(cd ${CHECKERFRAMEWORK} && ./gradlew assembleForJavac)
-	cd ../bcel-util && ./gradlew assemble -PcfLocal
-	cd ../bibtex-clean && ./gradlew assemble -PcfLocal
-	cd ../hashmap-util && ./gradlew assemble -PcfLocal
-	cd ../html-pretty-print && ./gradlew assemble -PcfLocal
-	cd ../icalavailable && ./gradlew assemble -PcfLocal
-	cd ../javac-parse && ./gradlew assemble -PcfLocal
-	cd ../javadoc-lookup && ./gradlew assemble -PcfLocal
-	cd ../lookup && ./gradlew assemble -PcfLocal
-	cd ../merging && ./gradlew assemble -PcfLocal
-	cd ../multi-version-control && ./gradlew assemble -PcfLocal
-	cd ../options && ./gradlew assemble -PcfLocal
-	cd ../plume-util && ./gradlew assemble -PcfLocal
-	cd ../reflection-util && ./gradlew assemble -PcfLocal
-	cd ../require-javadoc && ./gradlew assemble -PcfLocal
+	cd ../bcel-util && ./gradlew assemble -PcfVersion=local
+	cd ../bibtex-clean && ./gradlew assemble -PcfVersion=local
+	cd ../hashmap-util && ./gradlew assemble -PcfVersion=local
+	cd ../html-pretty-print && ./gradlew assemble -PcfVersion=local
+	cd ../icalavailable && ./gradlew assemble -PcfVersion=local
+	cd ../javac-parse && ./gradlew assemble -PcfVersion=local
+	cd ../javadoc-lookup && ./gradlew assemble -PcfVersion=local
+	cd ../lookup && ./gradlew assemble -PcfVersion=local
+	cd ../merging && ./gradlew assemble -PcfVersion=local
+	cd ../multi-version-control && ./gradlew assemble -PcfVersion=local
+	cd ../options && ./gradlew assemble -PcfVersion=local
+	cd ../plume-util && ./gradlew assemble -PcfVersion=local
+	cd ../reflection-util && ./gradlew assemble -PcfVersion=local
+	cd ../require-javadoc && ./gradlew assemble -PcfVersion=local
 
 build:
 	cd ../bcel-util && ./gradlew build
