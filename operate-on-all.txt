@@ -134,3 +134,30 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
 done
 
 ===========================================================================
+
+# To use a gradle Version Catalog:
+BRANCHNAME=gradle-version-catalog
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
+  preplace '(// Project name is read-only in build scripts)' 'plugins {    id("de.fayard.refreshVersions") version "0.60.6" } \1' settings.gradle
+  ./gradlew refreshVersionsMigrate --mode=VersionCatalogOnly
+  rm -f versions.properties
+  preplace 'id\("(.*\..*)"\)' 'alias(libs.plugins.\1)' build.gradle
+  preplace ':_' '' build.gradle
+  cronic make
+  cronic ./gradlew build && git checkout settings.gradle
+done
+cd ~/java/plume-lib
+# Sort paragraphs in all files gradle/libs.versions.toml.  Here are the files:
+find . -name libs.versions.toml | sort | grep $BRANCHNAME
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  git commit -m "Use Gradle Version Catalog" .
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
