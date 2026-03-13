@@ -8,7 +8,7 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   pwd
   PLUME_SCRIPTS=$HOME/bin/src/plume-scripts
-  for file in .coderabbit.yaml .pmd-ruleset.xml .github/renovate.json; do
+  for file in .claude/settings.json .coderabbit.yaml .github/renovate.json .pmd-ruleset.xml; do
     cp -pf ${PLUME_SCRIPTS}/$file $file
     git add $file
   done
