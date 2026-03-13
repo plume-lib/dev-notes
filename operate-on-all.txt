@@ -1,5 +1,17 @@
 ===========================================================================
 
+# To pull in master:
+BRANCHNAME=java21
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib
+  git-push-to $project $project-fork-mernst-branch-$BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
+  gw build
+done
+
+===========================================================================
+
 # To update files copied from elsewhere:
 BRANCHNAME=update-copied-files
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
