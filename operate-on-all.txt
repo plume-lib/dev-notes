@@ -1,12 +1,13 @@
 ===========================================================================
 
-# To pull in master:
+# To pull in master and check that the project builds, for branches that already exist:
 BRANCHNAME=java21
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib && \
   git-push-to $project $project-fork-mernst-branch-$BRANCHNAME && \
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME && \
   pwd && \
+  make -q && \
   gw build
 done
 
