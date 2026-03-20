@@ -12,6 +12,19 @@ done
 
 ===========================================================================
 
+# To pull in master and check that the project builds, for branches that already exist:
+BRANCHNAME=java21
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib && \
+  git-push-to $project $project-fork-mernst-branch-$BRANCHNAME && \
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME && \
+  pwd && \
+  make -q && \
+  gw build
+done
+
+===========================================================================
+
 # To update files copied from elsewhere:
 BRANCHNAME=update-copied-files
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
@@ -20,7 +33,7 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   pwd
   PLUME_SCRIPTS=$HOME/bin/src/plume-scripts
-  for file in .coderabbit.yaml .pmd-ruleset.xml .github/renovate.json; do
+  for file in .claude/settings.json .coderabbit.yaml .github/renovate.json .pmd-ruleset.xml; do
     cp -pf ${PLUME_SCRIPTS}/$file $file
     git add $file
   done
