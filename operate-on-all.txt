@@ -1,5 +1,17 @@
 ===========================================================================
 
+# To list all branches:
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project
+  pwd
+  git branch -a
+  cd ~/java/plume-lib/$project-fork-mernst
+  pwd
+  git branch -a
+done
+
+===========================================================================
+
 # To update files copied from elsewhere:
 BRANCHNAME=update-copied-files
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
