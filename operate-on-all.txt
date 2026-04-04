@@ -15,6 +15,7 @@ done
 # To pull in master and check that the project builds, for branches that already exist:
 BRANCHNAME=java21
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  echo $project
   cd ~/java/plume-lib && \
   git-push-to $project $project-fork-mernst-branch-$BRANCHNAME && \
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME && \
@@ -189,3 +190,8 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
 done
 
 ===========================================================================
+
+# To examine dependabot alerts (or to discover that they are disabled):
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  xdg-open https://github.com/plume-lib/$project/security/dependabot
+done
