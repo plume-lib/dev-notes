@@ -13,6 +13,7 @@ done
 ===========================================================================
 
 # To pull in master and check that the project builds, for branches that already exist:
+# (See below for the main development branch.)
 BRANCHNAME=java21
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   echo $project
@@ -33,9 +34,9 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   pwd
-  PLUME_SCRIPTS=$HOME/bin/src/plume-scripts
+  DOTS=$HOME/dots
   for file in .claude/settings.json .coderabbit.yaml .github/renovate.json .pmd-ruleset.xml; do
-    cp -pf ${PLUME_SCRIPTS}/$file $file
+    cp -pf ${DOTS}/$file $file
     git add $file
   done
   cp -pf ${PLUME_SCRIPTS}/code-style-github-workflow.yml .github/workflows/code-style.yml
@@ -191,7 +192,29 @@ done
 
 ===========================================================================
 
+# To generate API documentation by running javadoc:
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project
+  git pull
+  gw javadoc
+done
+
+===========================================================================
+
 # To examine dependabot alerts (or to discover that they are disabled):
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   xdg-open https://github.com/plume-lib/$project/security/dependabot
 done
+
+===========================================================================
+
+# To compile the main development branch:
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  echo $project
+  cd ~/java/plume-lib/$project && \
+  git pull && \
+  pwd && \
+  make -q && \
+  gw build
+done
+
