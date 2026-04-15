@@ -217,4 +217,8 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   make -q && \
   gw build
 done
-
+for project in bibtex-clean html-pretty-print icalavailable javadoc-lookup lookup merging multi-version-control ; do
+  echo $project
+  cd ~/java/plume-lib/$project && \
+  gw shadowjar
+done
