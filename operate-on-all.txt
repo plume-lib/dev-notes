@@ -28,6 +28,7 @@ done
 ===========================================================================
 
 # To update files copied from elsewhere:
+PLUME_SCRIPTS=$HOME/bin/src/plume-scripts
 BRANCHNAME=update-copied-files
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
@@ -101,12 +102,13 @@ done
 ===========================================================================
 
 # To add a new version of Java:
-# (Before doing this, check which Java versions the new Gradle supports.)
-# https://docs.gradle.org/current/userguide/compatibility.html .)
-# Note: You might need to use the "-ea" version even after the GA release.
-VER_PREV=25
-# VER_NEXT=26-ea
-VER_NEXT=26
+# Note: You might need to use the "-ea" version for a while even after the GA release.
+# Before upgrading Java:
+# * update to a Gradle that supports the given Java version:
+#   https://docs.gradle.org/current/userguide/compatibility.html .
+VER_PREV=26
+# VER_NEXT=27
+VER_NEXT=27-ea-2
 BRANCHNAME=java-${VER_NEXT}
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
@@ -128,28 +130,27 @@ done
 
 # To upgrade from an early release version of Java:
 # This might replace a previous non-ea version, or not; see multiple sed commands.
-# (Before doing this, check which Java versions the new Gradle supports:
-# https://docs.gradle.org/current/userguide/compatibility.html .)
-VER=25
+VER=26
 BRANCHNAME=java-${VER}-released
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
   gnb $BRANCHNAME
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   pwd
-# TODO: Generalize.
-  sed -i "s/'24', '25-ea'/'24', '25'/g" .github/workflows/gradle.yml
-  sed -i "s/'25', '26-ea'/'26'/g" .github/workflows/gradle.yml
-  git add .github/workflows/gradle.yml
   if [ -f .github/workflows/gradle-native-compile.yml ] ; then
-    sed -i "s/'24', '25-ea'/'24', '25'/g" .github/workflows/gradle-native-compile.yml
-    sed -i "s/'25', '26-ea'/'26'/g" .github/workflows/gradle-native-compile.yml
-    git add .github/workflows/gradle-native-compile.yml
+    gradle_files=".github/workflows/gradle.yml .github/workflows/gradle-native-compile.yml"
+  else
+    gradle_files=".github/workflows/gradle.yml"
   fi
+  # Which of these two `sed` commands is appropriate depends on the LTS version of Java.
+  sed -i "s/'24', '25-ea'/'25'/g" ${gradle_files}
+  sed -i "s/'25', '26-ea'/'25', '26'/g" ${gradle_files}
+  git add ${gradle_files}
   git commit -m "Test under JDK ${VER}, not JDK ${VER}-ea"
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
 done
+echo "Click \"Create pull request\" in the browser."
 
 ===========================================================================
 
