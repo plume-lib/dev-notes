@@ -27,6 +27,21 @@ done
 
 ===========================================================================
 
+# To create new branches:
+BRANCHNAME=new-branch
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
+  ./gradlew assemble -PcfVersion=local
+  ...
+  git push
+  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
 # To update files copied from elsewhere:
 PLUME_SCRIPTS=$HOME/bin/src/plume-scripts
 BRANCHNAME=update-copied-files
@@ -68,21 +83,6 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   else
     git commit -m "Fix gradle warnings"  build.gradle
   fi
-  git push
-  xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
-done
-
-===========================================================================
-
-# To create new branches:
-BRANCHNAME=new-branch
-for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
-  cd ~/java/plume-lib/$project-fork-mernst
-  gnb $BRANCHNAME
-  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
-  pwd
-  ./gradlew assemble -PcfVersion=local
-  ...
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
 done
