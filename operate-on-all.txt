@@ -248,3 +248,25 @@ for project in bibtex-clean html-pretty-print icalavailable javadoc-lookup looku
   cd ~/java/plume-lib/$project && \
   gw shadowjar
 done
+
+===========================================================================
+
+Non-Java projects:
+
+There is also checklink, but it should not be modified to be different than its upstream repository.
+
+BASEDIR=$HOME/bin/src
+BASEDIR=/scratch/mernst/clones/bin/src
+BRANCHNAME=new-branch-name
+for project in git-scripts html-tools manage-git-branches plume-scripts run-google-java-format trigger-travis ; do
+  cd $BASEDIR/$project
+  gnb $BRANCHNAME
+  cd $BASEDIR/$project-branch-$BRANCHNAME
+  pwd
+  make
+  ...
+  git push
+  xdg-open https://github.com/plume-lib/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
