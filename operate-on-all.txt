@@ -92,7 +92,8 @@ done
 # To create an Emacs TAGS table (after setting BRANCHNAME):
 etags `findfile build.gradle | grep $BRANCHNAME`
 
-# To build (after setting BRANCHNAME):
+# To build:
+BRANCHNAME=my-branch-name
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   pwd
@@ -213,6 +214,15 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project
   git pull
   gw javadoc
+done
+
+===========================================================================
+
+# To view dependencies:
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project
+  pwd
+  ./gradlew dependencies
 done
 
 ===========================================================================
