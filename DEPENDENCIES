@@ -17,24 +17,24 @@ Order of updates:
 These projects depend on nothing else from plume-lib (except require-javadoc):
 hashmap-util
 reflection-util
-html-pretty-print
+html-pretty-print (a program)
 
 These projects depend only on those above.
 bcel-util
 plume-util
 
 These projects depend only on those above.
-bibtex-clean
+bibtex-clean (a program)
 javac-parse
-javadoc-lookup
+javadoc-lookup (a program)
 options
 
 These projects depend only on those above.
-merging
+merging (a program)
 require-javadoc
-icalavailable
-lookup
-multi-version-control
+icalavailable (a program)
+lookup (a program)
+multi-version-control (a program)
 
 Other dependencies:
 $test/randoop
