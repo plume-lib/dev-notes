@@ -51,14 +51,12 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
   pwd
   DOTS=$HOME/dots
-  for file in .claude/settings.json .coderabbit.yaml .github/renovate.json .pmd-ruleset.xml; do
+  for file in .claude/settings.json .coderabbit.yaml .github/renovate.json .pmd-ruleset.xml prek.toml .yamllint.yaml .yamlfmt.yaml; do
     cp -pf ${DOTS}/$file $file
     git add $file
   done
-  cp -pf ${PLUME_SCRIPTS}/code-style-github-workflow.yml .github/workflows/code-style.yml
-  git add .github/workflows/code-style.yml
-  cp -pf ${PLUME_SCRIPTS}/code-style.Makefile Makefile
-  git add Makefile
+  cp -pf ${HOME}/bin/src/mdedots/dots/prek-github-actions.yaml .github/workflows/prek.yaml
+  git add .github/workflows/prek.yaml
   git commit -m "Update copied files"
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
@@ -234,35 +232,40 @@ done
 
 ===========================================================================
 
-# To compile the main development branch:
+# To compile:
+# For the main branch
+BRANCHSUFFIX=
+# For some other branch
+# BRANCHSUFFIX=-fork-mernst-branch-update-copied-files
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   echo $project
-  cd ~/java/plume-lib/$project && \
+  cd ~/java/plume-lib/$project$BRANCHSUFFIX && \
   git pull -q && \
   pwd && \
-  make style-check && \
+  prek -q run --all-files && \
   gw build && \
   echo "success: $project"
 done && \
 for project in bibtex-clean html-pretty-print icalavailable javadoc-lookup lookup merging multi-version-control ; do
   echo $project
-  cd ~/java/plume-lib/$project && \
-  gw shadowjar
+  cd ~/java/plume-lib/$project$BRANCHSUFFIX && \
+  cronic ./gradlew -q shadowjar
 done && \
 usejdk21 && \
 for project in merging ; do
   echo $project
-  cd ~/java/plume-lib/$project && \
+  cd ~/java/plume-lib/$project$BRANCHSUFFIX && \
   git pull -q && \
   pwd && \
-  make style-check && \
+  prek -q run --all-files && \
   gw build
 done && \
 for project in merging ; do
   echo $project
-  cd ~/java/plume-lib/$project && \
-  gw shadowjar
-done
+  cd ~/java/plume-lib/$project$BRANCHSUFFIX && \
+  cronic ./gradlew -q shadowjar
+done && \
+echo "Success on all projects"
 
 ===========================================================================
 
