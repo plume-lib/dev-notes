@@ -106,9 +106,11 @@ done
 
 ===========================================================================
 
-# To upgrade from an early release version of Java:
-# This might replace a previous non-ea version, or not; see multiple sed commands.
+# To upgrade from an early access (ea) version of Java to a released version:
+# This might replace a previous non-ea version, or not; see multiple sed commands, and
+# CHOOSE ONE sed command.
 VER=26
+VER_PREV=25
 BRANCHNAME=java-${VER}-released
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
@@ -121,12 +123,61 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
     gradle_files=".github/workflows/gradle.yml"
   fi
   # Which of these two `sed` commands is appropriate depends on the LTS version of Java.
-  sed -i "s/'24', '25-ea'/'25'/g" ${gradle_files}
-  sed -i "s/'25', '26-ea'/'25', '26'/g" ${gradle_files}
+  # Choose one of them.
+  sed -i "s/'${VER_PREV}', '${VER}-ea'/'${VER}'/g" ${gradle_files}
+  sed -i "s/'${VER_PREV}', '${VER}-ea'/'${VER_PREV}', '${VER}'/g" ${gradle_files}
   git add ${gradle_files}
   git commit -m "Test under JDK ${VER}, not JDK ${VER}-ea"
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+echo "Click \"Create pull request\" in the browser."
+
+===========================================================================
+
+# To stop supporting a version of Java:
+OLD_VER=17
+NEW_VER=21
+BRANCHNAME=java-${OLD_VER}-dropped
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  git pull --ff-only ../$project
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    github_actions_files=".github/workflows/gradle.yml .github/workflows/gradle-native-compile.yml"
+  else
+    github_actions_files=".github/workflows/gradle.yml"
+  fi
+  # Which of these two `sed` commands is appropriate depends on the LTS version of Java.
+  sed -i "s/java: \['${OLD_VER}', '/java: ['/g"  ${github_actions_files}
+  git add ${github_actions_files}
+  sed -i "s/options.release = ${OLD_VER}/options.release = ${NEW_VER}/g" build.gradle.kts
+  sed -i "s/-PtestJavaVersion=${OLD_VER}/-PtestJavaVersion=${NEW_VER}/g" build.gradle.kts
+  git add build.gradle.kts
+  if [ -f CHANGELOG.md ]; then
+    sed -i "/^# .* change log/a ## 9.9.9 (2026-08-??)\n\n- Requires Java ${NEW_VER} to run." CHANGELOG.md
+    sed -i '2i\\' CHANGELOG.md
+    git add CHANGELOG.md
+  fi
+  sed -i "/No explicit check of the Gradle JVM's version is needed here./d" settings.gradle.kts
+  sed -i "/to run, and reports a clear error on an unsupported JVM./d" settings.gradle.kts
+  sed -i '1i val minimumJavaVersion = JavaVersion.VERSION_21\n\nif (JavaVersion.current() < minimumJavaVersion) {\n  throw GradleException(\n    "This build requires Gradle to run under Java $minimumJavaVersion or later," +\n      " but Gradle is running under Java ${JavaVersion.current()}" +\n      " from ${System.getProperty("java.home")}."\n  )\n}' settings.gradle.kts
+  git add settings.gradle.kts
+  if [ -f travis.yml ]; then
+    sed -i "/  - openjdk${OLD_VER}/d" travis.yml
+    git add travis.yml
+  fi
+  if git commit -m "Drop support for JDK ${OLD_VER}"; then
+    if git push; then
+      xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+    else
+      echo "Unable to push in $(pwd)"
+    fi
+  else
+    echo "Unable to commit in $(pwd)"
+  fi
 done
 echo "Click \"Create pull request\" in the browser."
 
