@@ -13,7 +13,7 @@ done
 ===========================================================================
 
 # To pull in master and check that the project builds, for branches that already exist:
-# (See below for the main development branch.)
+# (See below for how to compile the main development branch.)
 BRANCHNAME=java21
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   echo $project
@@ -262,7 +262,9 @@ done
 
 ===========================================================================
 
-# To compile:
+# To compile (build):
+TASKS=build
+TASKS="spotlessCheck pmdMain pmdTest assemble"
 # For the main branch
 BRANCHSUFFIX=
 # For some other branch
@@ -270,10 +272,10 @@ BRANCHSUFFIX=
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   echo $project
   cd ~/java/plume-lib/$project$BRANCHSUFFIX && \
-  git pull -q && \
   pwd && \
+  git pull -q && \
   prek -q run --all-files && \
-  gw build && \
+  gw $TASKS && \
   echo "success: $project"
 done && \
 for project in bibtex-clean html-pretty-print icalavailable javadoc-lookup lookup merging multi-version-control ; do
@@ -288,7 +290,7 @@ for project in merging ; do
   git pull -q && \
   pwd && \
   prek -q run --all-files && \
-  gw build
+  gw $TASKS
 done && \
 for project in merging ; do
   echo $project
