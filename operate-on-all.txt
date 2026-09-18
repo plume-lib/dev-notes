@@ -79,14 +79,14 @@ done
 
 ===========================================================================
 
-# To add a new version of Java:
+# To *add* a new version of Java (typically used for the first Java version after a LTS version):
 # Note: You might need to use the "-ea" version for a while even after the GA release.
 # Before upgrading Java:
 # * update to a Gradle that supports the given Java version:
 #   https://docs.gradle.org/current/userguide/compatibility.html .
 VER_PREV=26
-# VER_NEXT=27
 VER_NEXT=27-ea-2
+VER_NEXT=27
 BRANCHNAME=java-${VER_NEXT}
 for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
   cd ~/java/plume-lib/$project-fork-mernst
@@ -102,6 +102,35 @@ for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailab
   git commit -m "Test under JDK ${VER_NEXT}"
   git push
   xdg-open https://github.com/mernst/$project/pull/new/$BRANCHNAME
+done
+
+===========================================================================
+
+# To *replace* a version of Java:
+# Note: You might need to use the "-ea" version for a while even after the GA release.
+# "-ea" versions arent' listed at https://adoptium.net/temurin/releases , but they exist.
+# Before upgrading Java:
+# * update to a Gradle that supports the given Java version:
+#   https://docs.gradle.org/current/userguide/compatibility.html .
+VER_PREV=26
+VER_NEXT=27-ea
+BRANCHNAME=java-${VER_NEXT}
+for project in bcel-util bibtex-clean hashmap-util html-pretty-print icalavailable javac-parse javadoc-lookup lookup merging multi-version-control options plume-util reflection-util require-javadoc ; do
+  cd ~/java/plume-lib/$project-fork-mernst
+  gnb $BRANCHNAME
+  cd ~/java/plume-lib/$project-fork-mernst-branch-$BRANCHNAME
+  pwd
+  sed -i "s/'${VER_PREV}'/'${VER_NEXT}'/g" .github/workflows/gradle.yml
+  git add .github/workflows/gradle.yml
+  if [ -f .github/workflows/gradle-native-compile.yml ] ; then
+    sed -i "s/'${VER_PREV}'/'${VER_NEXT}'/g" .github/workflows/gradle-native-compile.yml
+    git add .github/workflows/gradle-native-compile.yml
+  fi
+  git commit -m "Test under JDK ${VER_NEXT}"
+  git push
+  gh repo set-default plume-lib/$project
+  gh pr create --title "Test under JDK 27" --body ""
+  xdg-open https://github.com/plume-lib/$project/pull/$(pr-number)
 done
 
 ===========================================================================
